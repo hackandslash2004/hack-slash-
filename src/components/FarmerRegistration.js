@@ -32,8 +32,8 @@ function FarmerRegistration() {
         console.error('Failed to register farmer');
       }
     } catch (err) {
-      console.error('Error registering farmer:', err);
-    }
+      console.error('Error registering farmer:', err);
+    }
   };
 
   return (

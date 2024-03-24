@@ -14,7 +14,7 @@ function ConsumerRegistration() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Validate email address
@@ -22,10 +22,28 @@ function ConsumerRegistration() {
       alert('Please enter a valid email address.');
       return;
     }
-
+    try {
+      const response = await fetch('http://localhost:3000/api/consumers', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      if (response.ok) {
+        console.log('Consumer registered successfully');
+        // Reset the form data or perform any other actions
+      } else {
+        console.error('Failed to register consumer');
+      }
+    }catch (err) {
+      console.error('Error registering consumer:', err);
+    }
+  };
     // Handle form submission, e.g., send data to the backend
     console.log(formData);
-  };
+
 
   return (
     <div>
@@ -61,6 +79,6 @@ function ConsumerRegistration() {
       </form>
     </div>
   );
-}
+};
 
 export default ConsumerRegistration;
